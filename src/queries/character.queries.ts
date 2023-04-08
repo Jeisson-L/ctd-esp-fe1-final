@@ -1,9 +1,13 @@
 import { CharacterResults } from "../types/character.types";
 
-export const getCharacters = async (page: number | undefined): Promise<CharacterResults[]> => {
+export const getCharacters = async (page: number | undefined) => {
     const response = await fetch(getApiUrlForAllCharacters(page));
-    const data = await response.json();
-    return data.results;
+    if (response.ok) {
+        const data = await response.json();
+        return data;
+    } else {
+        throw new Error('Pagina no encontrada')
+    }
 };
 
 /**
