@@ -17,10 +17,14 @@ const Paginacion = () => {
     const urlPreviusPage = useAppSelector(state => state.character.infoPages.prev)
     const urlNextPage = useAppSelector(state => state.character.infoPages.next)
 
+    useEffect(() => {
+        dispatch(getPaginatedCharacters())
+    }, [])
+
     const previusPage = () =>{
         dispatch(getPaginatedCharacters(urlPreviusPage))
     }
-    
+
     const nextPage = () =>{
         dispatch(getPaginatedCharacters(urlNextPage))
     }

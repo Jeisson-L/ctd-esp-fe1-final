@@ -1,8 +1,6 @@
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../Redux/hooks';
+import { useAppSelector } from '../../Redux/hooks';
 import './grilla-personajes.css';
 import TarjetaPersonaje from './tarjeta-personaje.componente';
-import { getPaginatedCharacters } from '../../Redux/characterSlice';
 import { Character } from '../../types/character.types';
 
 
@@ -17,12 +15,17 @@ import { Character } from '../../types/character.types';
 const GrillaPersonajes = () => {
 
     const characters = useAppSelector(state => state.character.characters)
+    const error = useAppSelector(state => state.character.error)
 
     return <div className="grilla-personajes">
-        {characters && characters.map((character: Character) => (
-                <TarjetaPersonaje character={character}
-                    key={character.id} />
-            ))}
+        {
+            error 
+                ? <p> No se encontrontaron datos.</p>
+                : characters && characters.map((character: Character) => (
+                    <TarjetaPersonaje character={character}
+                        key={character.id} />
+                    ))
+        }
     </div>
 }
  

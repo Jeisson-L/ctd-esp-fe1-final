@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { Character, CharacterInfo } from "../types/character.types"
-import { getCharacters } from "../queries/character.queries"
+import { findCharactersByName, getCharacters } from "../queries/character.queries"
 
 
 interface initialType {
@@ -30,6 +30,14 @@ export const getPaginatedCharacters = createAsyncThunk(
     }
 )
 
+export const findCharactersByNamepag = createAsyncThunk(
+    '/findCharactersByName',
+    async (name: undefined | string | null) => {
+        const response = findCharactersByName(name)
+        return response
+    }
+)
+
 export const characterSlice = createSlice({
     name: 'character',
     initialState,
@@ -45,6 +53,14 @@ export const characterSlice = createSlice({
             state.error = ""
         })
         builder.addCase(getPaginatedCharacters.rejected, (state, action) => {
+            state.error = action.error.message
+        })
+        builder.addCase(findCharactersByNamepag.fulfilled, (state, action) => {
+            state.characters = action.payload.results
+            state.infoPages = action.payload.info
+            state.error = ""
+        })
+        builder.addCase(findCharactersByNamepag.rejected, (state, action) => {
             state.error = action.error.message
         })
     }
