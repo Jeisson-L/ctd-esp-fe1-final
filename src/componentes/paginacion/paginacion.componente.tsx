@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { getPaginatedCharacters } from '../../Redux/characterSlice';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks';
 import './paginacion.css';
 
 /**
@@ -10,9 +13,21 @@ import './paginacion.css';
  */
 const Paginacion = () => {
 
+    const dispatch = useAppDispatch()
+    const urlPreviusPage = useAppSelector(state => state.character.infoPages.prev)
+    const urlNextPage = useAppSelector(state => state.character.infoPages.next)
+
+    const previusPage = () =>{
+        dispatch(getPaginatedCharacters(urlPreviusPage))
+    }
+    
+    const nextPage = () =>{
+        dispatch(getPaginatedCharacters(urlNextPage))
+    }
+    
     return <div className="paginacion">
-        <button disabled={true} className={"primary"}>Anterior</button>
-        <button disabled={false} className={"primary"}>Siguiente</button>
+        <button disabled={urlPreviusPage === null} className={"primary"} onClick={previusPage}>Anterior</button>
+        <button disabled={urlNextPage === null} className={"primary"} onClick={nextPage}>Siguiente</button>
     </div>
 }
 

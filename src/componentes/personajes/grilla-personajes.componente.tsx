@@ -1,5 +1,10 @@
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks';
 import './grilla-personajes.css';
 import TarjetaPersonaje from './tarjeta-personaje.componente';
+import { getPaginatedCharacters } from '../../Redux/characterSlice';
+import { Character } from '../../types/character.types';
+
 
 /**
  * Grilla de personajes para la pagina de inicio
@@ -11,10 +16,13 @@ import TarjetaPersonaje from './tarjeta-personaje.componente';
  */
 const GrillaPersonajes = () => {
 
+    const characters = useAppSelector(state => state.character.characters)
+
     return <div className="grilla-personajes">
-       <TarjetaPersonaje />
-       <TarjetaPersonaje />
-       <TarjetaPersonaje />
+        {characters && characters.map((character: Character) => (
+                <TarjetaPersonaje character={character}
+                    key={character.id} />
+            ))}
     </div>
 }
  

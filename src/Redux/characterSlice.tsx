@@ -24,8 +24,8 @@ const initialState: initialType = {
 
 export const getPaginatedCharacters = createAsyncThunk(
     '/getPaginatedCharacters',
-    async (page: undefined | number) => {
-        const response = getCharacters(page)
+    async (url: undefined | string | null) => {
+        const response = getCharacters(url)
         return response
     }
 )
@@ -40,7 +40,8 @@ export const characterSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(getPaginatedCharacters.fulfilled, (state, action) => {
-            state.characters = action.payload
+            state.characters = action.payload.results
+            state.infoPages = action.payload.info
             state.error = ""
         })
         builder.addCase(getPaginatedCharacters.rejected, (state, action) => {
