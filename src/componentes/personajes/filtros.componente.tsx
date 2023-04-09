@@ -5,7 +5,7 @@ import { findCharactersByNamepag } from '../../Redux/characterSlice';
 
 const Filtros = () => {
     const dispatch = useAppDispatch()
-
+    
     const filterByName = (e:React.ChangeEvent<HTMLInputElement>) => {
         dispatch(findCharactersByNamepag(e.target.value))
     }

@@ -7,6 +7,8 @@ interface initialType {
     filter: string
     characters: Character[]
     infoPages: CharacterInfo
+    favorites: Character[]
+    characterSelected : Character
     error: string | undefined
 }
 
@@ -18,6 +20,21 @@ const initialState: initialType = {
         pages: 0,
         next: '',
         prev: ''
+    },
+    favorites: [],
+    characterSelected: {
+        id: 0,
+        name: '',
+        status: '',
+        species: '',
+        type: '',
+        gender: '',
+        origin:	{name:'', link: ''},
+        location: {name:'', link: ''},
+        image: '',
+        episode: [],
+        url: '',
+        created: '',
     },
     error: ""
 }
@@ -44,6 +61,14 @@ export const characterSlice = createSlice({
     reducers:{
         actionFilter: (state, action) => {
             state.filter = action.payload
+        },
+        actionAddFavorite: (state, action) => {
+            if (!state.favorites.find(character => character.id === action.payload.id)) {
+                state.favorites.push(action.payload)
+            }
+        },
+        actionRemoveFavorite: (state, action) => {
+            state.favorites = state.favorites.filter(character => character.id !== action.payload.id)            
         }
     },
     extraReducers: (builder) => {
@@ -66,7 +91,7 @@ export const characterSlice = createSlice({
     }
 })
 
-export const { actionFilter } = characterSlice.actions
+export const { actionFilter, actionAddFavorite, actionRemoveFavorite } = characterSlice.actions
 
 
 export default characterSlice.reducer

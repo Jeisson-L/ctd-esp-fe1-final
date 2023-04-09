@@ -2,11 +2,8 @@ import { Character } from '../../types/character.types';
 import BotonFavorito from '../botones/boton-favorito.componente';
 import './tarjeta-personaje.css';
 
-
-
 interface TarjetaPersonajeProps {
     character: Character,
-    //seleccionarPokemon: (pokemon: Pokemon) => void
 }
 
 /**
@@ -23,7 +20,7 @@ const TarjetaPersonaje = ({character} : TarjetaPersonajeProps) => {
         <img src={character.image} alt={character.name}/>
         <div className="tarjeta-personaje-body">
             <span>{character.name}</span>
-            <BotonFavorito esFavorito={false} />
+            <BotonFavorito character={character} />
         </div>
     </div>
 }
