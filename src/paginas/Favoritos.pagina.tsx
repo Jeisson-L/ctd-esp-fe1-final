@@ -20,7 +20,11 @@ const PaginaFavoritos = () => {
             <h3>Personajes Favoritos</h3>
             <button className="danger" onClick={() => dispatch(actionRemoveAllFaverites())}>Eliminar Todos</button>
         </div>
-        <GrillaPersonajes characters={favorites} />
+        {
+            favorites.length == 0 ?
+            <p><strong>No seleccionaste ningun personaje como favorito</strong></p>:
+            <GrillaPersonajes characters={favorites} />
+        }
     </div>
 }
 
