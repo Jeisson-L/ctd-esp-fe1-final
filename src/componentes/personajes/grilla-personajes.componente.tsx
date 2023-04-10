@@ -1,4 +1,3 @@
-import { useAppSelector } from '../../Redux/hooks';
 import './grilla-personajes.css';
 import TarjetaPersonaje from './tarjeta-personaje.componente';
 import { Character } from '../../types/character.types';
@@ -18,7 +17,7 @@ interface GrillaPersonajesProps {
  */
 const GrillaPersonajes = ({characters} : GrillaPersonajesProps) => {
     
-    const error = characters.length==0
+    const error = characters.length === 0
 
     return <div className="grilla-personajes">
         {

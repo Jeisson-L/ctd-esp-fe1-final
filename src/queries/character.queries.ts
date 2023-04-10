@@ -1,4 +1,4 @@
-const urlBase = 'https://rickandmortyapi.com/api';
+export const urlBase = 'https://rickandmortyapi.com/api';
 const urlCharacterDefault = urlBase + '/character';
 
 export const getCharacters = async (url: string | undefined | null) => {

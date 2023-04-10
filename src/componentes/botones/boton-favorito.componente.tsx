@@ -1,7 +1,6 @@
-import { useDispatch } from 'react-redux';
 import './boton-favorito.css';
 import { Character } from '../../types/character.types';
-import { useAppSelector } from '../../Redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../Redux/hooks';
 import { actionAddFavorite, actionRemoveFavorite } from '../../Redux/characterSlice';
 /**
  * Boton que indica si un elemento es favorito o no, y da la posibilidad de marcarlo/desmarcarlo
@@ -17,7 +16,7 @@ interface Props {
 }
 
 const BotonFavorito = ({character}: Props) => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const isFavorite = useAppSelector(state => state.character.favorites).some(c => c.id === character.id)
     const src = isFavorite ? "/imagenes/star-filled.png" : "/imagenes/star.png"
 

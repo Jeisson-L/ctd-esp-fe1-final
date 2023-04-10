@@ -25,7 +25,7 @@ const PaginaInicio = () => {
 
     useEffect(()=>{
         dispatch(findCharactersByNamepag(filter))
-    }, [])
+    }, [filter, dispatch])
 
     return <div className="container">
         <div className="actions">

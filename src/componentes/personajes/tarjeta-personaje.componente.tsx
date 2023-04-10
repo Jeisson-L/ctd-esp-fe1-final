@@ -1,3 +1,6 @@
+import { useNavigate } from 'react-router-dom';
+import { actionSelectCharacter } from '../../Redux/characterSlice';
+import { useAppDispatch } from '../../Redux/hooks';
 import { Character } from '../../types/character.types';
 import BotonFavorito from '../botones/boton-favorito.componente';
 import './tarjeta-personaje.css';
@@ -16,10 +19,18 @@ interface TarjetaPersonajeProps {
  */
 const TarjetaPersonaje = ({character} : TarjetaPersonajeProps) => {
 
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+
+    const selectCharac = () => {
+        dispatch(actionSelectCharacter(character))
+        navigate('/detalle')
+    }
+
     return <div className="tarjeta-personaje">
-        <img src={character.image} alt={character.name}/>
+        <img src={character.image} alt={character.name} onClick={selectCharac}/>
         <div className="tarjeta-personaje-body">
-            <span>{character.name}</span>
+            <span onClick={selectCharac}>{character.name}</span>
             <BotonFavorito character={character} />
         </div>
     </div>

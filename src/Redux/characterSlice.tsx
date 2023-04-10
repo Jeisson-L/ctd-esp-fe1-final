@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { Character, CharacterInfo } from "../types/character.types"
 import { findCharactersByName, getCharacters } from "../queries/character.queries"
+import { getEpisodes } from "../queries/episode.queries"
+import { episode } from "../types/episode.types"
 
 
 interface initialType {
@@ -9,11 +11,12 @@ interface initialType {
     infoPages: CharacterInfo
     favorites: Character[]
     characterSelected : Character
+    episodes: episode[]
     error: string | undefined
 }
 
 const initialState: initialType = {
-    filter: "",
+    filter: '',
     characters: [],
     infoPages: {
         count: 0,
@@ -36,7 +39,8 @@ const initialState: initialType = {
         url: '',
         created: '',
     },
-    error: ""
+    episodes:[],
+    error: ''
 }
 
 export const getPaginatedCharacters = createAsyncThunk(
@@ -51,6 +55,14 @@ export const findCharactersByNamepag = createAsyncThunk(
     '/findCharactersByName',
     async (name: undefined | string | null) => {
         const response = findCharactersByName(name)
+        return response
+    }
+)
+
+export const filterEpisodes = createAsyncThunk(
+    '/filterEpisodes',
+    async (episodeIds: string) => {
+        const response = getEpisodes(episodeIds)
         return response
     }
 )
@@ -75,6 +87,9 @@ export const characterSlice = createSlice({
         },
         actionRemoveAllFaverites: (state) => {
             state.favorites = []
+        },
+        actionSelectCharacter: (state, action) => {
+            state.characterSelected = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -85,7 +100,7 @@ export const characterSlice = createSlice({
         })
         builder.addCase(getPaginatedCharacters.rejected, (state, action) => {
             state.error = action.error.message
-            if (action.error.code == '404')
+            if (action.error.code === '404')
             {
                 state.characters = []
             }
@@ -98,10 +113,18 @@ export const characterSlice = createSlice({
         builder.addCase(findCharactersByNamepag.rejected, (state, action) => {
             state.error = action.error.message
         })
+        builder.addCase(filterEpisodes.fulfilled, (state, action) => {
+            state.episodes = Array.isArray(action.payload) ? action.payload : [action.payload]
+            state.error = ""
+        })
+        builder.addCase(filterEpisodes.rejected, (state, action) => {
+            state.error = action.error.message
+        })
     }
 })
 
-export const { actionFilter, actionCleanFilter, actionAddFavorite, actionRemoveFavorite, actionRemoveAllFaverites } = characterSlice.actions
+export const { actionFilter, actionCleanFilter, actionAddFavorite, 
+    actionRemoveFavorite, actionRemoveAllFaverites, actionSelectCharacter } = characterSlice.actions
 
 
 export default characterSlice.reducer

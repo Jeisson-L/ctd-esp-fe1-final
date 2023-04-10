@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './filtros.css';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks';
 import { actionFilter, findCharactersByNamepag } from '../../Redux/characterSlice';
