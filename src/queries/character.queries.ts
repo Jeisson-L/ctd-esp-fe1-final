@@ -8,6 +8,16 @@ export const getCharacters = async (url: string | undefined | null) => {
     if (response.ok) {
         const data = await response.json();
         return data;
+    }  else if (response.status === 404){
+        return {
+            info: {
+                count: 0,
+                pages: 0,
+                next: null,
+                prev: null
+            },
+            results: [],
+        }
     } else {
         throw new Error('Pagina no encontrada')
     }
@@ -21,7 +31,6 @@ export const findCharactersByName = async (name: string | undefined | null) => {
         const data = await response.json(); 
         return data;
     } else if (response.status === 404){
-        console.log (response)
         return {
             info: {
                 count: 0,

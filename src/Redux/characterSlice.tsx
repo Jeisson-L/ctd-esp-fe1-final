@@ -112,6 +112,11 @@ export const characterSlice = createSlice({
         })
         builder.addCase(findCharactersByNamepag.rejected, (state, action) => {
             state.error = action.error.message
+            state.error = action.error.message
+            if (action.error.code === '404')
+            {
+                state.characters = []
+            }
         })
         builder.addCase(filterEpisodes.fulfilled, (state, action) => {
             state.episodes = Array.isArray(action.payload) ? action.payload : [action.payload]

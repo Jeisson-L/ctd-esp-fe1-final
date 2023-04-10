@@ -20,7 +20,6 @@ const PaginaInicio = () => {
 
     const clean = () => {
         dispatch(actionCleanFilter())
-        dispatch(getPaginatedCharacters())
     }
 
     useEffect(()=>{

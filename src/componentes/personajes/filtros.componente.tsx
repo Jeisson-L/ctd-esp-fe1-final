@@ -1,6 +1,6 @@
 import './filtros.css';
 import { useAppDispatch, useAppSelector } from '../../Redux/hooks';
-import { actionFilter, findCharactersByNamepag } from '../../Redux/characterSlice';
+import { actionFilter } from '../../Redux/characterSlice';
 
 const Filtros = () => {
     const dispatch = useAppDispatch()
@@ -8,7 +8,6 @@ const Filtros = () => {
     
     const filterByName = (e:React.ChangeEvent<HTMLInputElement>) => {
         dispatch(actionFilter(e.target.value));
-        dispatch(findCharactersByNamepag(e.target.value))
     }
 
     return <div className="filtros">
