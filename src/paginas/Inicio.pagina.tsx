@@ -17,7 +17,7 @@ const PaginaInicio = () => {
     return <div className="container">
         <div className="actions">
             <h3>Catálogo de Personajes</h3>
-            <button className="danger">Test Button</button>
+            <button className="danger">Limpiar Filtros</button>
         </div>
         <Filtros />
         <Paginacion />

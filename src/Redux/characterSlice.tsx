@@ -69,6 +69,9 @@ export const characterSlice = createSlice({
         },
         actionRemoveFavorite: (state, action) => {
             state.favorites = state.favorites.filter(character => character.id !== action.payload.id)            
+        },
+        actionRemoveAllFaverites: (state) => {
+            state.favorites = []
         }
     },
     extraReducers: (builder) => {
@@ -95,7 +98,7 @@ export const characterSlice = createSlice({
     }
 })
 
-export const { actionFilter, actionAddFavorite, actionRemoveFavorite } = characterSlice.actions
+export const { actionFilter, actionAddFavorite, actionRemoveFavorite, actionRemoveAllFaverites } = characterSlice.actions
 
 
 export default characterSlice.reducer
