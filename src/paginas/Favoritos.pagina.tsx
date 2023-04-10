@@ -1,3 +1,4 @@
+import { useAppSelector } from "../Redux/hooks";
 import GrillaPersonajes from "../componentes/personajes/grilla-personajes.componente";
 
 /**
@@ -9,12 +10,15 @@ import GrillaPersonajes from "../componentes/personajes/grilla-personajes.compon
  * @returns la pagina de favoritos
  */
 const PaginaFavoritos = () => {
+
+    const favorites = useAppSelector(state => state.character.favorites)
+
     return <div className="container">
         <div className="actions">
             <h3>Personajes Favoritos</h3>
             <button className="danger">Test Button</button>
         </div>
-        <GrillaPersonajes />
+        <GrillaPersonajes characters={favorites} />
     </div>
 }
 

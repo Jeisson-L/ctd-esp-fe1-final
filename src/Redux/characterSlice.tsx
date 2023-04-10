@@ -79,6 +79,10 @@ export const characterSlice = createSlice({
         })
         builder.addCase(getPaginatedCharacters.rejected, (state, action) => {
             state.error = action.error.message
+            if (action.error.code == '404')
+            {
+                state.characters = []
+            }
         })
         builder.addCase(findCharactersByNamepag.fulfilled, (state, action) => {
             state.characters = action.payload.results

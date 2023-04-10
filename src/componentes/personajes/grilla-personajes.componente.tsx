@@ -4,6 +4,10 @@ import TarjetaPersonaje from './tarjeta-personaje.componente';
 import { Character } from '../../types/character.types';
 
 
+interface GrillaPersonajesProps {
+    characters: Character[]
+}
+
 /**
  * Grilla de personajes para la pagina de inicio
  * 
@@ -12,10 +16,9 @@ import { Character } from '../../types/character.types';
  * 
  * @returns un JSX element 
  */
-const GrillaPersonajes = () => {
-
-    const characters = useAppSelector(state => state.character.characters)
-    const error = useAppSelector(state => state.character.error)
+const GrillaPersonajes = ({characters} : GrillaPersonajesProps) => {
+    
+    const error = characters.length==0
 
     return <div className="grilla-personajes">
         {
