@@ -2,18 +2,15 @@ import './grilla-personajes.css';
 import TarjetaPersonaje from './tarjeta-personaje.componente';
 import { Character } from '../../types/character.types';
 
-
 interface GrillaPersonajesProps {
     characters: Character[]
 }
 
+
 /**
  * Grilla de personajes para la pagina de inicio
- * 
- * Deberás agregar las funciones necesarias para mostrar y paginar los personajes
- * 
- * 
- * @returns un JSX element 
+ * @param {Character[]} characters
+ * @returns un JSX element
  */
 const GrillaPersonajes = ({characters} : GrillaPersonajesProps) => {
     
